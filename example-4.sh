@@ -38,9 +38,9 @@ function editUserGroup {
         if  grep "^$login:" /etc/passwd > /dev/null ; then 
             echo "===>   L'utilisateur existe" 
             echo "===>   Enter le(s) groupe de l'utilisateur"
-            read -r tgroups
+            read -r groups
             if [$groups !=""]; then
-                usermod -G $groups $login
+                usermod -aG $groups $login
             fi
         else 
             echo "===>   L'utilisateur n'existe pas" 

@@ -25,10 +25,10 @@ until [ "$choix" -lt 0 ]; do
         read -r passwd
         echo "===>   Enter le(s) groupe de l'utilisateur"
         read -r groups
-        if [ $login -eq ""]||[ $home -eq ""]||[ $passwd -eq ""]||[ $groups -eq ""]; then
+        if [ $login -eq "" ]||[ $home -eq "" ]||[ $passwd -eq "" ]||[ $groups -eq "" ]; then
             echo "error"
         else
-            sudo useradd $login --home $home --create-home --groups $groups --shell /bin/bash
+            sudo useradd $login --password $passwd --home $home --create-home --groups $groups --shell /bin/bash
             echo "===>   Utilisateur $login créés !"
         fi
     elif [ "$choix" -eq 2 ]; then 
@@ -39,9 +39,9 @@ until [ "$choix" -lt 0 ]; do
         if  grep "^$login:" /etc/passwd > /dev/null ; then 
             echo "===>   L'utilisateur existe" 
             echo "===>   Enter le(s) groupe de l'utilisateur"
-            read -r tgroups
-            if [$groups !=""]; then
-                usermod -G $groups $login
+            read -r groups
+            if [ $groups !="" ]; then
+                usermod -AG $groups $login
             fi
         else 
             echo "===>   L'utilisateur n'existe pas" 
